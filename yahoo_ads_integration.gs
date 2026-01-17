@@ -1111,7 +1111,10 @@ function fetchMediaForAccount_(account, headers) {
       const img = m.imageMedia || {};
       const vid = m.videoMedia || {};
 
-      let type = '', asp = '', w = '', h = '', size = '', play = '', fileName = '';
+      let type = '', asp = '', w = '', h = '', size = '', play = '';
+
+      // ★ ファイル名はmediaRecord直下のmediaTitleから取得
+      const fileName = m.mediaTitle || '';
 
       if (img.mediaType) {
         type = img.mediaType;
@@ -1119,7 +1122,6 @@ function fetchMediaForAccount_(account, headers) {
         w = img.width || '';
         h = img.height || '';
         size = img.fileSize || '';
-        fileName = img.fileName || '';  // ★ 画像のファイル名を取得
       } else if (vid.mediaType) {
         type = vid.mediaType;
         asp = vid.aspectRatio || '';
@@ -1127,7 +1129,6 @@ function fetchMediaForAccount_(account, headers) {
         h = vid.height || '';
         size = vid.fileSize || '';
         play = vid.playbackTime || '';
-        fileName = vid.fileName || '';  // ★ 動画のファイル名を取得
       }
 
       results.push([
